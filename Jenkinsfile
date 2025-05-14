@@ -1,6 +1,8 @@
 pipeline{
   agent any
-  
+ triggers {
+        githubPush()
+    } 
   stages {
     stage("build") {
       steps {
@@ -9,6 +11,11 @@ pipeline{
           echo 'building the app...'
       }
     }
+    stage('Hello') {
+       steps {
+          echo 'Triggered by GitHub!'
+            }
+        }
     stage("test") {
       steps {
           echo 'testing the app...'
