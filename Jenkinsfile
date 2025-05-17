@@ -2,15 +2,23 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'nodejs-18'
-        gradle 'gradle-7.6'
+        nodejs 'Node-24'    // Must match the name in Global Tool Config
+        gradle 'abc'   // Must match the name in Global Tool Config
     }
 
     stages {
-        stage('Check Tools') {
+        stage('Check Node.js') {
             steps {
+                sh 'echo "Node.js Version:"'
                 sh 'node -v'
+                sh 'echo "npm Version:"'
                 sh 'npm -v'
+            }
+        }
+
+        stage('Check Gradle') {
+            steps {
+                sh 'echo "Gradle Version:"'
                 sh 'gradle -v'
             }
         }
