@@ -1,30 +1,18 @@
-pipeline{
-  agent any
- triggers {
-        githubPush()
-    } 
-  stages {
-    stage("build") {
-      steps {
-          // sh 'npm install'
-          // sh 'npm build'
-          echo 'building the app...'
-      }
+pipeline {
+    agent any
+
+    tools {
+        nodejs 'nodejs-18'
+        gradle 'gradle-7.6'
     }
-    stage('Hello') {
-       steps {
-          echo 'Triggered by GitHub!'
+
+    stages {
+        stage('Check Tools') {
+            steps {
+                sh 'node -v'
+                sh 'npm -v'
+                sh 'gradle -v'
             }
         }
-    stage("test") {
-      steps {
-          echo 'testing the app...'
-      }
     }
-    stage("deploy") {
-      steps {
-          echo 'deploying the app...'
-      }
-    }
-  }
 }
